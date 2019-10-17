@@ -32,5 +32,18 @@ struct Blob {
   };
 #endif
 };
+
+struct Edge {
+  int head;
+  int tail;
+#ifndef H5CPP
+  Edge() { ; }
+  friend std::ostream& operator<<(std::ostream& ost, const Edge& e) {
+    ost << "Edge: " << "head: " << e.head << ", tail: " << e.tail << std::endl;
+    return ost;
+  };
+#endif
+};
+
 } // namespace WireCellH5CPP
 #endif

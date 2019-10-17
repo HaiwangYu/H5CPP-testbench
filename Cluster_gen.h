@@ -1,8 +1,8 @@
 /* Copyright (c) 2018 vargaconsulting, Toronto,ON Canada
  *     Author: Varga, Steven <steven@vargaconsulting.ca>
  */
-#ifndef H5CPP_GUARD_ILCup
-#define H5CPP_GUARD_ILCup
+#ifndef H5CPP_GUARD_febyv
+#define H5CPP_GUARD_febyv
 
 namespace h5{
     //template specialization of WireCellH5CPP::Blob to create HDF5 COMPOUND type
@@ -30,5 +30,20 @@ namespace h5{
     };
 }
 H5CPP_REGISTER_STRUCT(WireCellH5CPP::Blob);
+
+namespace h5{
+    //template specialization of WireCellH5CPP::Edge to create HDF5 COMPOUND type
+    template<> hid_t inline register_struct<WireCellH5CPP::Edge>(){
+
+        hid_t ct_00 = H5Tcreate(H5T_COMPOUND, sizeof (WireCellH5CPP::Edge));
+        H5Tinsert(ct_00, "head",	HOFFSET(WireCellH5CPP::Edge,head),H5T_NATIVE_INT);
+        H5Tinsert(ct_00, "tail",	HOFFSET(WireCellH5CPP::Edge,tail),H5T_NATIVE_INT);
+
+        //if not used with h5cpp framework, but as a standalone code generator then
+        //the returned 'hid_t ct_00' must be closed: H5Tclose(ct_00);
+        return ct_00;
+    };
+}
+H5CPP_REGISTER_STRUCT(WireCellH5CPP::Edge);
 
 #endif
