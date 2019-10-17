@@ -1,8 +1,8 @@
 /* Copyright (c) 2018 vargaconsulting, Toronto,ON Canada
  *     Author: Varga, Steven <steven@vargaconsulting.ca>
  */
-#ifndef H5CPP_GUARD_EnoZH
-#define H5CPP_GUARD_EnoZH
+#ifndef H5CPP_GUARD_vyBSe
+#define H5CPP_GUARD_vyBSe
 
 namespace h5{
     //template specialization of WireCellH5CPP::Trace to create HDF5 COMPOUND type

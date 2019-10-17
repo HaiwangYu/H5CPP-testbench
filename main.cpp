@@ -52,17 +52,17 @@ void test_class() {
     // for(int i=0; i<size; ++i) v_trace[i] = WireCellH5CPP::Trace(i);
     // h5::write(fd, "/v_trace", v_trace, h5::gzip{9} | h5::chunk{size});
 
-    std::vector<WireCellH5CPP::Cluster> v_cluster;
-    v_cluster.resize(size);
-    std::fill_n(v_cluster.begin(), size, WireCellH5CPP::Cluster());
-    for(int i=0; i<size; ++i) v_cluster[i] = WireCellH5CPP::Cluster();
-    h5::write(fd, "/v_cluster", v_cluster, h5::gzip{9} | h5::chunk{size});
+    std::vector<WireCellH5CPP::Blob> v_blob;
+    v_blob.resize(size);
+    std::fill_n(v_blob.begin(), size, WireCellH5CPP::Blob());
+    for(int i=0; i<size; ++i) v_blob[i] = WireCellH5CPP::Blob();
+    h5::write(fd, "/v_blob", v_blob, h5::gzip{9} | h5::chunk{size});
   }
 
   { // read entire dataset back
-    auto v_trace = h5::read<std::vector<WireCellH5CPP::Trace>>(fd, "/v_cluster");
+    auto v = h5::read<std::vector<WireCellH5CPP::Blob>>(fd, "/v_blob");
     log("read back");
-    for(auto a : v_trace) std::cout << a;
+    for(auto e : v) std::cout << e;
   }
 }
 

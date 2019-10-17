@@ -17,15 +17,17 @@ namespace WireCellH5CPP {
   #endif
   };
 
-struct Cluster {
+struct Blob {
   int ident;
   float value;
+  double start;
+  double span;
   int ncorners;
   Corner corners[H_WireCellH5CPP_Cluster_MAX_Corner];
 #ifndef H5CPP
-  Cluster() { std::fill_n(corners, H_WireCellH5CPP_Cluster_MAX_Corner, Corner()); }
-  friend std::ostream& operator<<(std::ostream& ost, const Cluster& cluster) {
-    ost << "Cluster: " << cluster.ident << ", value: " << cluster.value << ", ncorners: " << cluster.ncorners << std::endl;
+  Blob() { std::fill_n(corners, H_WireCellH5CPP_Cluster_MAX_Corner, Corner()); }
+  friend std::ostream& operator<<(std::ostream& ost, const Blob& b) {
+    ost << "Blob: " << b.ident << ", value: " << b.value << ", ncorners: " << b.ncorners << std::endl;
     return ost;
   };
 #endif

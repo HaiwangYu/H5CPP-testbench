@@ -1,23 +1,25 @@
 /* Copyright (c) 2018 vargaconsulting, Toronto,ON Canada
  *     Author: Varga, Steven <steven@vargaconsulting.ca>
  */
-#ifndef H5CPP_GUARD_VOxYl
-#define H5CPP_GUARD_VOxYl
+#ifndef H5CPP_GUARD_ILCup
+#define H5CPP_GUARD_ILCup
 
 namespace h5{
-    //template specialization of WireCellH5CPP::Cluster to create HDF5 COMPOUND type
-    template<> hid_t inline register_struct<WireCellH5CPP::Cluster>(){
+    //template specialization of WireCellH5CPP::Blob to create HDF5 COMPOUND type
+    template<> hid_t inline register_struct<WireCellH5CPP::Blob>(){
         hsize_t at_00_[] ={3};            hid_t at_00 = H5Tarray_create(H5T_NATIVE_FLOAT,1,at_00_);
 
         hid_t ct_00 = H5Tcreate(H5T_COMPOUND, sizeof (WireCellH5CPP::Corner));
         H5Tinsert(ct_00, "pos",	HOFFSET(WireCellH5CPP::Corner,pos),at_00);
         hsize_t at_01_[] ={100};            hid_t at_01 = H5Tarray_create(ct_00,1,at_01_);
 
-        hid_t ct_01 = H5Tcreate(H5T_COMPOUND, sizeof (WireCellH5CPP::Cluster));
-        H5Tinsert(ct_01, "ident",	HOFFSET(WireCellH5CPP::Cluster,ident),H5T_NATIVE_INT);
-        H5Tinsert(ct_01, "value",	HOFFSET(WireCellH5CPP::Cluster,value),H5T_NATIVE_FLOAT);
-        H5Tinsert(ct_01, "ncorners",	HOFFSET(WireCellH5CPP::Cluster,ncorners),H5T_NATIVE_INT);
-        H5Tinsert(ct_01, "corners",	HOFFSET(WireCellH5CPP::Cluster,corners),at_01);
+        hid_t ct_01 = H5Tcreate(H5T_COMPOUND, sizeof (WireCellH5CPP::Blob));
+        H5Tinsert(ct_01, "ident",	HOFFSET(WireCellH5CPP::Blob,ident),H5T_NATIVE_INT);
+        H5Tinsert(ct_01, "value",	HOFFSET(WireCellH5CPP::Blob,value),H5T_NATIVE_FLOAT);
+        H5Tinsert(ct_01, "start",	HOFFSET(WireCellH5CPP::Blob,start),H5T_NATIVE_DOUBLE);
+        H5Tinsert(ct_01, "span",	HOFFSET(WireCellH5CPP::Blob,span),H5T_NATIVE_DOUBLE);
+        H5Tinsert(ct_01, "ncorners",	HOFFSET(WireCellH5CPP::Blob,ncorners),H5T_NATIVE_INT);
+        H5Tinsert(ct_01, "corners",	HOFFSET(WireCellH5CPP::Blob,corners),at_01);
 
         //closing all hid_t allocations to prevent resource leakage
         H5Tclose(at_00); H5Tclose(ct_00); H5Tclose(at_01); 
@@ -27,6 +29,6 @@ namespace h5{
         return ct_01;
     };
 }
-H5CPP_REGISTER_STRUCT(WireCellH5CPP::Cluster);
+H5CPP_REGISTER_STRUCT(WireCellH5CPP::Blob);
 
 #endif
