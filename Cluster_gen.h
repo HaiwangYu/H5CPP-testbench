@@ -1,8 +1,8 @@
 /* Copyright (c) 2018 vargaconsulting, Toronto,ON Canada
  *     Author: Varga, Steven <steven@vargaconsulting.ca>
  */
-#ifndef H5CPP_GUARD_bOhEs
-#define H5CPP_GUARD_bOhEs
+#ifndef H5CPP_GUARD_VOxYl
+#define H5CPP_GUARD_VOxYl
 
 namespace h5{
     //template specialization of WireCellH5CPP::Cluster to create HDF5 COMPOUND type
@@ -14,6 +14,9 @@ namespace h5{
         hsize_t at_01_[] ={100};            hid_t at_01 = H5Tarray_create(ct_00,1,at_01_);
 
         hid_t ct_01 = H5Tcreate(H5T_COMPOUND, sizeof (WireCellH5CPP::Cluster));
+        H5Tinsert(ct_01, "ident",	HOFFSET(WireCellH5CPP::Cluster,ident),H5T_NATIVE_INT);
+        H5Tinsert(ct_01, "value",	HOFFSET(WireCellH5CPP::Cluster,value),H5T_NATIVE_FLOAT);
+        H5Tinsert(ct_01, "ncorners",	HOFFSET(WireCellH5CPP::Cluster,ncorners),H5T_NATIVE_INT);
         H5Tinsert(ct_01, "corners",	HOFFSET(WireCellH5CPP::Cluster,corners),at_01);
 
         //closing all hid_t allocations to prevent resource leakage

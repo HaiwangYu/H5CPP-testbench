@@ -6,4 +6,5 @@ CXXFLAGS="-std=c++17 -Wno-deprecated \
 	-I /cvmfs/larsoft.opensciencegrid.org/products/h5cpp/v1_10_4_1/include"
 echo $CXXFLAGS
 
-h5cpp  main.cpp -- $CXXFLAGS -I/usr/include/h5cpp-llvm -DH5CPP -Dgen.h
+h5cpp  Trace.cpp   -- $CXXFLAGS -I/usr/include/h5cpp-llvm -DH5CPP -DTrace_gen.h
+h5cpp  Cluster.cpp -- $CXXFLAGS -I/usr/include/h5cpp-llvm -DH5CPP -DCluster_gen.h

@@ -44,24 +44,25 @@ void test_class() {
 
   h5::fd_t fd = h5::create("example.h5", H5F_ACC_TRUNC);
   {
-    const int size = 512;
-    std::vector<WireCellH5CPP::Trace> v_trace;
-    v_trace.resize(size);
-    // std::fill_n(vec.begin(), size, WireCellH5CPP::Trace());
-    for(int i=0; i<size; ++i) v_trace[i] = WireCellH5CPP::Trace(i);
-    h5::write(fd, "/v_trace", v_trace, h5::gzip{9} | h5::chunk{size});
+    const int size = 128;
+    
+    // std::vector<WireCellH5CPP::Trace> v_trace;
+    // v_trace.resize(size);
+    // // std::fill_n(vec.begin(), size, WireCellH5CPP::Trace());
+    // for(int i=0; i<size; ++i) v_trace[i] = WireCellH5CPP::Trace(i);
+    // h5::write(fd, "/v_trace", v_trace, h5::gzip{9} | h5::chunk{size});
 
     std::vector<WireCellH5CPP::Cluster> v_cluster;
     v_cluster.resize(size);
-    // std::fill_n(vec.begin(), size, WireCellH5CPP::Trace());
+    std::fill_n(v_cluster.begin(), size, WireCellH5CPP::Cluster());
     for(int i=0; i<size; ++i) v_cluster[i] = WireCellH5CPP::Cluster();
     h5::write(fd, "/v_cluster", v_cluster, h5::gzip{9} | h5::chunk{size});
   }
 
   { // read entire dataset back
-    auto v_trace = h5::read<std::vector<WireCellH5CPP::Trace>>(fd, "/v_trace");
+    auto v_trace = h5::read<std::vector<WireCellH5CPP::Trace>>(fd, "/v_cluster");
     log("read back");
-    for(auto a : v_trace) a.print();
+    for(auto a : v_trace) std::cout << a;
   }
 }
 
